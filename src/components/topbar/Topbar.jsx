@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './Topbar.scss';
 import { FiLogOut } from 'react-icons/fi'
 import { FaSignOutAlt, FaUser } from 'react-icons/fa'
@@ -15,7 +15,7 @@ const Topbar = () => {
   const dispatch = useDispatch();
 
   const queryClient = useQueryClient();
-  const mutation = useMutation({
+  const logoutMutation = useMutation({
     mutationFn: () => axiosReq.post('/auth/logout'),
     onSuccess: (res) => {
       queryClient.invalidateQueries(['logout']);
@@ -34,16 +34,30 @@ const Topbar = () => {
       }
     }
     checkAuth();
-  }, [dispatch])
+  }, [dispatch]);
+
+  const navbarRef = useRef(null);
+  const handleClickOutside = (event) => {
+    if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+      setUserSec(false);
+      dispatch(setNavStatus(false))
+    }
+  };
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   const handleLogout = () => {
     dispatch(clearAdmin());
-    mutation.mutate();
+    logoutMutation.mutate();
   };
 
 
   return (
-    <div className="topbar">
+    <div className="topbar" ref={navbarRef}>
       <div className="logo">Target Coaching</div>
       {/* <div className={`logout ${!nav? 'active' : ''}`}>
         <FiLogOut />
@@ -58,7 +72,7 @@ const Topbar = () => {
           <div className="user-name">Mr Alex</div>
           <div className="title">Admin</div>
           <span><FaUser /> Profile</span>
-          <span><FaSignOutAlt /> Sign Out</span>
+          <span onClick={handleLogout}><FaSignOutAlt /> Sign Out</span>
         </div>
       </div>
       <div className="nav-btn">

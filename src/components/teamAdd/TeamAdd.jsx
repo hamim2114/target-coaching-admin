@@ -3,9 +3,9 @@ import './TeamAdd.scss'
 import { MdFileUpload } from 'react-icons/md'
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { axiosReq } from '../../utils/axiosReq';
-import { toast } from 'react-toastify';
 import { uploadImage } from '../../utils/upload';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const TeamAdd = () => {
   const [img, setImg] = useState('');
@@ -21,7 +21,7 @@ const TeamAdd = () => {
     mutationFn: (input) => axiosReq.post('/team', input),
     onSuccess: () => {
       queryClient.invalidateQueries(['team']);
-      toast.success('Added Successfully!');
+      toast('Added Successfully!');
       setSuccess(true);
     },
     onError: (err) => setErrmsg(err.response.data)
@@ -67,7 +67,7 @@ const TeamAdd = () => {
         <input onChange={handleChange} name='phone' type="text" placeholder='Phone "optional"' />
         <input onChange={handleChange} name='email' type="text" placeholder='Email "optional"' />
         <input onChange={handleChange} name='facebook' type="text" placeholder='Facebook Profile Link "optional"' />
-        <button type='submit'>{loading ? 'Loading..' : 'ADD'}</button>
+        <button disabled={loading} type='submit'>{loading ? 'Loading..' : 'ADD'}</button>
         <p style={{color: 'red'}}>{errmsg}</p>
       </form>
     </div>
