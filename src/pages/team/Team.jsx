@@ -26,7 +26,7 @@ const Team = () => {
     mutationFn: (id) => axiosReq.delete(`/team/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries(['team']);
-      toast.success('Team Member Removed!')
+      toast.success('Removed!')
     }
   });
 
@@ -84,7 +84,7 @@ const Team = () => {
         style={customStyles}
       >
         <h2 className='modal-h2'>Delete Confirmation</h2>
-        <p className='modal-p'>Are you sure you want to Remove Team Member?</p>
+        <p className='modal-p'>Confirm?</p>
         <div>
           <button className='modal-cancel' onClick={closeDeleteModal}>Cancel</button>
           <button className='modal-delete' onClick={confirmDelete}>Delete</button>

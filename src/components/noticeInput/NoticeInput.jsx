@@ -1,16 +1,20 @@
 import { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import './JobInput.scss';
+import './NoticeInput.scss';
+import { MdFileUpload } from 'react-icons/md';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { axiosReq } from '../../utils/axiosReq';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { uploadImage } from '../../utils/upload';
 import { useEffect } from 'react';
 
-const JobInput = () => {
+const NoticeInput = () => {
   const [value, setValue] = useState('');
   const [title, setTitle] = useState('');
+  const [img, setImg] = useState('');
+  const [file, setFile] = useState(null);
   const [createSuccess, setCreateSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errmsg, setErrmsg] = useState('')
@@ -18,30 +22,42 @@ const JobInput = () => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: (input) => axiosReq.post('/job', input),
+    mutationFn: (input) => axiosReq.post('/notice', input),
     onSuccess: () => {
-      queryClient.invalidateQueries(['job']);
+      queryClient.invalidateQueries(['notice']);
       setCreateSuccess(true);
-      toast.success('Job Created Successfully!');
+      toast.success('Notice Created Successfully!');
     },
     onError: (err) => setErrmsg(err.response.data)
   });
 
   const handlePost = async (e) => {
     e.preventDefault();
-    setLoading(true);
     if (title && value) {
+      setLoading(true)
+      if (file) {
+        const {public_id, secure_url} = await uploadImage(file);
+        mutation.mutate({imgId: public_id, img: secure_url, title, body: value });
+      } else {
         mutation.mutate({ title, body: value });
       }
       setLoading(false)
+    };
   }
 
   const navigate = useNavigate();
   useEffect(() => {
     if (createSuccess) {
-      navigate('/job');
+      navigate('/notice');
     }
   }, [createSuccess])
+
+
+  const handleImgChange = async (e) => {
+    const file = e.target.files[0];
+    setFile(file);
+    setImg(URL.createObjectURL(file));
+  };
 
   const toolbarOptions = {
     toolbar: [
@@ -57,14 +73,19 @@ const JobInput = () => {
     ],
   };
   return (
-    <div className="blogInput">
+    <div className="noticeInput">
       <form className="wrapper" onSubmit={handlePost}>
-        <input required type="text" placeholder="Job Title" onChange={e => setTitle(e.target.value)} />
-        <div className="editor">
-          <ReactQuill modules={toolbarOptions} theme="snow" placeholder="Job Descriptions" value={value} onChange={setValue} required={true} />
+        <div className="upload-img">
+          <label htmlFor="file"><MdFileUpload /></label>
+          {img && <img src={img} alt="Upload Image" />}
         </div>
-        <button disabled={loading} type='submit' className="blog-btn">
-          {loading ? 'Loading...' : 'Publish Job'}
+        <input type="file" className="file" hidden name="" id="file" onChange={handleImgChange} />
+        <input required type="text" placeholder="Notice Title" onChange={e => setTitle(e.target.value)} />
+        <div className="editor">
+          <ReactQuill modules={toolbarOptions} theme="snow" placeholder="Notice Descriptions" value={value} onChange={setValue} required={true} />
+        </div>
+        <button disabled={loading} type='submit' className="notice-btn">
+          {loading ? 'Loading...' : 'POST'}
         </button>
         <p style={{color: 'red'}}>{errmsg}</p>
       </form>
@@ -72,4 +93,4 @@ const JobInput = () => {
   );
 };
 
-export default JobInput;
+export default NoticeInput;

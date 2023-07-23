@@ -64,14 +64,14 @@ const Topbar = () => {
         <span onClick={handleLogout}>Logout</span>
       </div> */}
       <div className="user" onClick={() => setUserSec(p => !p)}>
-        <div className="name">Mr Alex</div>
+        <div className="name">Hafizur Rahman</div>
         <div className="img"><img src="/avatar.jpg" alt="" /></div>
       </div>
       <div className={`user-sec-main ${userSec && 'active'}`}>
         <div className="user-sec">
-          <div className="user-name">Mr Alex</div>
+          <div className="user-name">Hafizur Rahman</div>
           <div className="title">Admin</div>
-          <span><FaUser /> Profile</span>
+          {/* <span><FaUser /> Profile</span> */}
           <span onClick={handleLogout}><FaSignOutAlt /> Sign Out</span>
         </div>
       </div>

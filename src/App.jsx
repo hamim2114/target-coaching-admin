@@ -1,8 +1,6 @@
-import { Navigate, Outlet, Route, RouterProvider, Routes, createBrowserRouter } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.scss'
 import 'react-toastify/dist/ReactToastify.css';
-import Sidebar from './components/sidebar/Sidebar';
-import Topbar from './components/topbar/Topbar';
 import Dashboard from './pages/dashboard/Dashboard';
 import Blog from './pages/blog/Blog';
 import Team from './pages/team/Team';
@@ -16,6 +14,12 @@ import Login from './pages/login/Login';
 import Layout from './components/layout/Layout';
 import Course from './pages/course/Course';
 import CourseInput from './components/courseInput/CourseInput';
+import Notice from './pages/notice/Notice';
+import NoticeInput from './components/noticeInput/NoticeInput';
+import Event from './pages/event/Event';
+import EditNotice from './components/editNotice/EditNotice';
+import EventInput from './components/eventInput/EventInput';
+import EditEvent from './components/editEvent/EditEvent';
 
 function App() {
   const { admin } = useSelector(state => state.admin);
@@ -30,78 +34,29 @@ function App() {
 
   return (
     <>
-        <Routes>
-          <Route path='/' element={<Verify><Layout /></Verify> }>
-            <Route index element={<Dashboard />} />
-            <Route path='team' element={<Team />} />
-            <Route path='team/add' element={<TeamAdd />} />
-            <Route path='course' element={<Course />} />
-            <Route path='course/create' element={<CourseInput />} />
-            <Route path='course/:id' element={<EditCourse />} />
-            <Route path='blog' element={<Blog />} />
-            <Route path='blog/create' element={<BlogInput />} />
-            <Route path='blog/:blogId' element={<EditBlog />} />
-          </Route>
-          <Route path='/login' element={admin ? <Navigate to='/' /> : <Login />} />
-        </Routes>
+      <Routes>
+        <Route path='/' element={<Verify><Layout /></Verify>}>
+          <Route index element={<Dashboard />} />
+          <Route path='notice' element={<Notice />} />
+          <Route path='notice/create' element={<NoticeInput />} />
+          <Route path='notice/:id' element={<EditNotice />} />
+          <Route path='team' element={<Team />} />
+          <Route path='team/add' element={<TeamAdd />} />
+          <Route path='course' element={<Course />} />
+          <Route path='course/create' element={<CourseInput />} />
+          <Route path='course/:id' element={<EditCourse />} />
+          <Route path='event' element={<Event />} />
+          <Route path='event/create' element={<EventInput />} />
+          <Route path='event/:id' element={<EditEvent />} />
+          <Route path='blog' element={<Blog />} />
+          <Route path='blog/create' element={<BlogInput />} />
+          <Route path='blog/:blogId' element={<EditBlog />} />
+          <Route path='gallery' element={<Gallery />} />
+        </Route>
+        <Route path='/login' element={admin ? <Navigate to='/' /> : <Login />} />
+      </Routes>
     </>
   )
 };
-
-// const router = createBrowserRouter([
-//   {
-//     path: '/',
-//     element: <Layout />,
-//     children: [
-//       {
-//         path: '/',
-//         element: <Dashboard />
-//       },
-//       {
-//         path: 'blog',
-//         element: <Blog />
-//       },
-//       {
-//         path: 'blog/create',
-//         element: <BlogInput />
-//       },
-//       {
-//         path: 'blog/:blogId',
-//         element: <EditBlog />
-//       },
-//       {
-//         path: 'job',
-//         element: <Job />
-//       },
-//       {
-//         path: 'job/create',
-//         element: <JobInput />
-//       },
-//       {
-//         path: 'job/:jobId',
-//         element: <EditJob />
-//       },
-//       {
-//         path: 'team',
-//         element: <Team />
-//       },
-//       {
-//         path: 'team/add',
-//         element: <TeamAdd />
-//       },
-//       {
-//         path: 'gallery',
-//         element: <Gallery />
-//       },
-//     ],
-//   },
-//   {
-//     path: '/login',
-//     element: admin ? <Navigate to={'/'} /> : <Login />
-//   }
-// ]);
-
-//   return <RouterProvider router={router} />;
-// }
 
 export default App;

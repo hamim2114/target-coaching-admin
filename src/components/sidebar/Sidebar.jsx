@@ -27,10 +27,10 @@ const Sidebar = () => {
         <Link to='/team' className={`list-item ${pathname === '/team' ? 'active' : ''}`} onClick={() => dispatch(setNavStatus(!nav))}><Person2OutlinedIcon /> Teacher</Link>
         <Link to='/' className={`list-item ${pathname === '/job' ? 'active' : ''}`} onClick={() => dispatch(setNavStatus(!nav))}><FaceOutlinedIcon /> Student</Link>
         <Link to='/course' className={`list-item ${pathname === '/course' ? 'active' : ''}`} onClick={() => dispatch(setNavStatus(!nav))}><TypeSpecimenOutlinedIcon /> Course</Link>
-        <Link to='/' className={`list-item ${pathname === '/notice' ? 'active' : ''}`} onClick={() => dispatch(setNavStatus(!nav))}><AnnouncementOutlinedIcon /> Notice</Link>
-        <Link to='/' className={`list-item ${pathname === '/job' ? 'active' : ''}`} onClick={() => dispatch(setNavStatus(!nav))}><EventNoteOutlinedIcon /> Event</Link>
+        <Link to='/notice' className={`list-item ${pathname === '/notice' ? 'active' : ''}`} onClick={() => dispatch(setNavStatus(!nav))}><AnnouncementOutlinedIcon /> Notice</Link>
+        <Link to='/event' className={`list-item ${pathname === '/event' ? 'active' : ''}`} onClick={() => dispatch(setNavStatus(!nav))}><EventNoteOutlinedIcon /> Event</Link>
         <Link to='/blog' className={`list-item ${pathname === '/blog' ? 'active' : ''}`} onClick={() => dispatch(setNavStatus(!nav))}><ArticleOutlinedIcon /> Blog</Link>
-        <Link to='/' className={`list-item ${pathname === '/gallery' ? 'active' : ''}`} onClick={() => dispatch(setNavStatus(!nav))}><ImageOutlinedIcon /> Gallery</Link>
+        <Link to='/gallery' className={`list-item ${pathname === '/gallery' ? 'active' : ''}`} onClick={() => dispatch(setNavStatus(!nav))}><ImageOutlinedIcon /> Gallery</Link>
       </div>
     </div>
   )

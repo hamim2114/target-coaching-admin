@@ -1,9 +1,11 @@
 @import '../../global.scss';
 
-.jobInput{
+.edit-event{
   .wrapper{
     width: 100%;
     padding: 3rem;
+    display: flex;
+    flex-direction: column;
     input{
       padding: 10px;
       width: 400px;
@@ -21,8 +23,8 @@
         height: 400px;
       }
     }
-      .job-btn{
-        align-self: flex-end;
+      .event-btn{
+        align-self: flex-start;
         margin-top: 1rem;
         background-color: $color-dark-blue;
         color: #fafafa;
