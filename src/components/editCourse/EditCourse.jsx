@@ -72,9 +72,9 @@ const EditCourse = () => {
       {isLoading ? 'Loading..' : error ? 'Something went wrong!' :
         !data ? <h2 style={{ padding: '5rem', color: 'gray' }}>Course Not Found!</h2> :
           <div className="wrapper">
-            {input.class && <input type="text" name='class' placeholder='Class' onChange={handleInput} value={input.class} />}
-            {input.date && <input type="text" name='date' placeholder='Date' onChange={handleInput} value={input.date} />}
-            {input.time && <input type="text" name='time' placeholder='Time' onChange={handleInput} value={input.time} />}
+            <input type="text" name='class' placeholder='Class' onChange={handleInput} value={input?.class} />
+            <input type="text" name='date' placeholder='Date' onChange={handleInput} value={input?.date} />
+            <input type="text" name='time' placeholder='Time' onChange={handleInput} value={input?.time} />
             <div className="editor">
               {desc && <ReactQuill modules={toolbarOptions} theme="snow" placeholder='Descriptions' value={desc} onChange={setDesc} />}
             </div>

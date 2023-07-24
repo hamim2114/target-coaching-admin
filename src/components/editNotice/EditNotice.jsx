@@ -65,9 +65,9 @@ const EditNotice = () => {
       {isLoading ? 'Loading..' :
       !data ? <h2 style={{ padding: '5rem', color: 'gray' }}>Notice Not Found!</h2> :
         <div className="wrapper">
-          {data.title && <input type="text" value={title} placeholder='Blog Title' onChange={(e) => setTitle(e.target.value)} />}
+          <input type="text" value={title} placeholder='Notice Title' onChange={(e) => setTitle(e.target.value)} />
           <div className="editor">
-            {value && <ReactQuill theme="snow" modules={toolbarOptions} placeholder='Blog Descriptions' value={value} onChange={setValue} />}
+            <ReactQuill theme="snow" modules={toolbarOptions} placeholder='Blog Descriptions' value={value} onChange={setValue} />
           </div>
           <button disabled={mutation.isLoading} className='blog-btn' onClick={updateHandler}>{mutation.isLoading? 'Loading...' : 'UPDATE'}</button>
           {errorMsg && <p style={{color: 'red'}}>{errorMsg}</p>}

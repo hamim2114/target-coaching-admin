@@ -27,12 +27,12 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <div className="dashboard-wrapper">
-        <div className="total"><h4> Total Students:</h4>0</div>
-        <div className="total"><h4> Total Teachers:</h4>{teams.length}</div>
-        <div className="total"><h4> Total Course:</h4>{course.length}</div>
-        <div className="total"><h4> Active Notice:</h4>{notice.length}</div>
+        <div className="total"><h4>Students:</h4>0</div>
+        <div className="total"><h4>Teachers:</h4>{teams.length}</div>
+        <div className="total"><h4>Course:</h4>{course.length}</div>
+        <div className="total"><h4>ANotice:</h4>{notice.length}</div>
         <div className="total"><h4>Events:</h4>{event.length}</div>
-        <div className="total"><h4>Total Blog:</h4>{blogs.length}</div>
+        <div className="total"><h4>Blog:</h4>{blogs.length}</div>
       </div>
     </div>
   )

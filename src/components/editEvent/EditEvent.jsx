@@ -73,10 +73,10 @@ const EditEvent = () => {
       {isLoading ? 'Loading..' : error ? 'Something went wrong!' :
         !data ? <h2 style={{ padding: '5rem', color: 'gray' }}>Course Not Found!</h2> :
           <div className="wrapper">
-            {input.class && <input type="text" name='title' placeholder='Class' onChange={handleInput} value={input.title} />}
-            {input.date && <input type="text" name='date' placeholder='Date' onChange={handleInput} value={input.date} />}
-            {input.time && <input type="text" name='time' placeholder='Time' onChange={handleInput} value={input.time} />}
-            {input.time && <input type="text" name='location' placeholder='Location' onChange={handleInput} value={input.location} />}
+            <input type="text" name='title' placeholder='Class' onChange={handleInput} value={input?.title} />
+            <input type="text" name='date' placeholder='Date' onChange={handleInput} value={input?.date} />
+            <input type="text" name='time' placeholder='Time' onChange={handleInput} value={input?.time} />
+            <input type="text" name='location' placeholder='Location' onChange={handleInput} value={input?.location} />
             <div className="editor">
               {body && <ReactQuill modules={toolbarOptions} theme="snow" placeholder='Descriptions' value={body} onChange={setBody} />}
             </div>
